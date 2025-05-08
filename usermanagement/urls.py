@@ -19,5 +19,6 @@ from django.urls import path
 from usermanagement import views
 
 urlpatterns = [
-    path('users/add', views.add_user)
+    path('users/add', views.add),
+    path('users/login', views.login)
 ]
