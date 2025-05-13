@@ -11,6 +11,22 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import configparser
+import os
+
+INI_FILE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "settings.ini")
+
+# Load settings from an external INI file
+config = configparser.ConfigParser()
+config.read(INI_FILE_PATH)
+
+AGORA = {
+    "APP_ID": config.get("agora", "APP_ID"),
+    "APP_CERT": config.get("agora", "APP_CERT"),
+    "CHAT_API": config.get("agora", "CHAT_API"),
+    "ORG_NAME": config.get("agora", "ORG_NAME"),
+    "APP_NAME": config.get("agora", "APP_NAME")
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
