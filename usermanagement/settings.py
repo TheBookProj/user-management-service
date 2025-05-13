@@ -22,7 +22,10 @@ config.read(INI_FILE_PATH)
 
 AGORA = {
     "APP_ID": config.get("agora", "APP_ID"),
-    "APP_CERT": config.get("agora", "APP_CERT")
+    "APP_CERT": config.get("agora", "APP_CERT"),
+    "CHAT_API": config.get("agora", "CHAT_API"),
+    "ORG_NAME": config.get("agora", "ORG_NAME"),
+    "APP_NAME": config.get("agora", "APP_NAME")
 }
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
