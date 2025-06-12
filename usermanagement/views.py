@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.forms.models import model_to_dict
 from usermanagementservice.models import User
 from rest_framework.decorators import api_view
 from helpers import agora
@@ -40,6 +41,19 @@ def login(request):
         user_id = str(user.id)
         rtm_token = agora.generate_user_token(user_id)
 
-        return JsonResponse({"error": "", "token": rtm_token, "id": user_id}, status=200)
+        return JsonResponse({"error": "", "token": rtm_token, "id": user_id, "username": user.username}, status=200)
     except:
         return JsonResponse({"error":"Server error."}, status=500)
+
+@api_view(['GET'])
+def get(request, user_id):
+    try:
+        user = User.objects.filter(id=user_id).first()
+
+        if user is None:
+            return JsonResponse({"error": "User not found."}, status=404)
+            
+        return JsonResponse({"error": "", "user": model_to_dict(user)}, status=200, safe=False)
+    except:
+        return JsonResponse({"error":"Server error."}, status=500)
+

@@ -20,5 +20,6 @@ from usermanagement import views
 
 urlpatterns = [
     path('users/add', views.add),
-    path('users/login', views.login)
+    path('users/login', views.login),
+    path('users/get/<int:user_id>', views.get)
 ]
